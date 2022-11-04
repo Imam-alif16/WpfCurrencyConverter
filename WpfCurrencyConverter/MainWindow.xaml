@@ -5,18 +5,109 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfCurrencyConverter"
         mc:Ignorable="d"
-        Title="CurrencyConverter" Height="450" Width="800" Background="#2E3440"
+        Title="CurrencyConverter" Height="768" Width="1024" Background="#2E3440"
         ResizeMode="CanMinimize" WindowStyle="SingleBorderWindow">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Dictionary1.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
     <Border>
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="75"/>
+                <RowDefinition Height="100"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="250"/>
+                <ColumnDefinition Width="410"/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
+
+            <TextBlock Text="CurrencyConverter"
+                       Grid.ColumnSpan="2"
+                       Foreground="#E5E9F0"
+                       FontSize="28"
+                       TextAlignment="Center"
+                       VerticalAlignment="Center"/>
+
+            <StackPanel Grid.Row="1"
+                        Grid.ColumnSpan="2"
+                        HorizontalAlignment="Center"
+                        Width="750">
+
+                <Border Margin="0,60,0,0"
+                        Background="#535D73"
+                        Padding="40"
+                        CornerRadius="10">
+                    <StackPanel Orientation="Vertical">
+                        <StackPanel Orientation="Horizontal"
+                                    HorizontalAlignment="Center"
+                                    Margin="0,0,0,20">
+                            <StackPanel Margin="0,0,30,0">
+                                <TextBlock Text="Amount"
+                                           Foreground="#E5E9F0"
+                                           FontSize="18"/>
+
+                                <TextBox Margin="0,10,0,0"
+                                         Padding="3"
+                                         Width="200"
+                                         Height="30"
+                                         HorizontalAlignment="Left"
+                                         VerticalContentAlignment="Center"
+                                         Background="#E5E9F0">
+                                </TextBox>
+                            </StackPanel>
+
+                            <StackPanel Margin="0,0,30,0">
+                                <TextBlock Text="From"
+                                           Foreground="#E5E9F0"
+                                           FontSize="18"/>
+
+                                <ComboBox Style="{DynamicResource ComboBoxStyle1}" 
+                                          Margin="0,10,0,0"
+                                          Width="200"
+                                          Height="30"
+                                          HorizontalAlignment="Left"
+                                          VerticalContentAlignment="Center">
+                                </ComboBox>
+                            </StackPanel>
+
+                            <StackPanel Margin="0,0,0,0">
+                                <TextBlock Text="To"
+                                           Foreground="#E5E9F0"
+                                           FontSize="18"/>
+
+                                <ComboBox Style="{DynamicResource ComboBoxStyle1}" Margin="0,10,0,0"
+                                          Width="200"
+                                          Height="30"
+                                          HorizontalAlignment="Left"
+                                          VerticalContentAlignment="Center">
+                                </ComboBox>
+                            </StackPanel>
+                        </StackPanel>
+
+                        <Button Width="100"
+                                Height="30"
+                                Content="Convert"
+                                FontSize="12"
+                                HorizontalAlignment="Right"
+                                Margin="0,0,5,0" 
+                                Background="#FFE5E9F0"
+                                Foreground="#3B4252">
+                            <Button.Resources>
+                                <Style TargetType="{x:Type Border}">
+                                    <Setter Property="CornerRadius" Value="3"/>
+                                </Style>
+                            </Button.Resources>
+                        </Button>
+                    </StackPanel>
+                </Border>
+
+            </StackPanel>
         </Grid>
     </Border>
 </Window>
