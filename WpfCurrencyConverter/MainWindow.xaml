@@ -23,19 +23,18 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="410"/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
             <TextBlock Text="CurrencyConverter"
-                       Grid.ColumnSpan="2"
+                       Grid.Column="0"
                        Foreground="#E5E9F0"
                        FontSize="28"
                        TextAlignment="Center"
                        VerticalAlignment="Center"/>
 
             <StackPanel Grid.Row="1"
-                        Grid.ColumnSpan="2"
+                        Grid.Column="0"
                         HorizontalAlignment="Center"
                         Width="750">
 
@@ -67,7 +66,8 @@
                                            Foreground="#E5E9F0"
                                            FontSize="18"/>
 
-                                <ComboBox Style="{DynamicResource ComboBoxStyle1}" 
+                                <ComboBox Style="{DynamicResource ComboBoxStyle1}"
+                                          Name="comboboxFrom"
                                           Margin="0,10,0,0"
                                           Width="200"
                                           Height="30"
@@ -82,6 +82,7 @@
                                            FontSize="18"/>
 
                                 <ComboBox Style="{DynamicResource ComboBoxStyle1}" Margin="0,10,0,0"
+                                          Name="comboboxTo"
                                           Width="200"
                                           Height="30"
                                           HorizontalAlignment="Left"

@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using CurrencyConverter = WpfCurrencyConverter.CurrencyConverter;
 
 namespace WpfCurrencyConverter
 {
@@ -20,9 +21,23 @@ namespace WpfCurrencyConverter
     /// </summary>
     public partial class MainWindow : Window
     {
+        CurrencyConverter currencyConverter;
         public MainWindow()
         {
             InitializeComponent();
+            currencyConverter = new CurrencyConverter();
+
+            Dictionary<string, string> symbolData = currencyConverter.GetSymbols();
+            comboboxFrom.Items.Clear();
+            comboboxTo.Items.Clear();
+
+            comboboxFrom.ItemsSource = symbolData;
+            comboboxFrom.DisplayMemberPath = "Value";
+            comboboxFrom.SelectedValuePath = "Key";
+
+            comboboxTo.ItemsSource = symbolData;
+            comboboxTo.DisplayMemberPath = "Value";
+            comboboxTo.SelectedValuePath = "Key";
         }
     }
 }
