@@ -30,6 +30,21 @@ namespace WpfCurrencyConverter
             return symbols;
         }
 
+        internal double Convert(string fromCurrency, string toCurrency, double currencyAmount)
+        {
+            string responseContent = GetResponseString($"exchangerates_data/convert?to={toCurrency}&from={fromCurrency}&amount={currencyAmount}");
+
+            Dictionary<string, object> responseData = JsonConvert.DeserializeObject<Dictionary<string, object>>(responseContent);
+            if ((bool)responseData["success"])
+            {
+                return (double)responseData["result"];
+            }
+            else
+            {
+                return -1;
+            }
+        }
+
         private string GetResponseString(string relativeURI)
         {
             var client = new RestClient("https://api.apilayer.com/");

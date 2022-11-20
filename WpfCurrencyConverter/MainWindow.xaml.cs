@@ -39,5 +39,15 @@ namespace WpfCurrencyConverter
             comboboxTo.DisplayMemberPath = "Value";
             comboboxTo.SelectedValuePath = "Key";
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            string fromCurrency = ((KeyValuePair<string, string>)comboboxFrom.SelectedItem).Key;
+            string toCurrency = ((KeyValuePair<string, string>)comboboxTo.SelectedItem).Key;
+            double currencyAmount = double.Parse(inputCurrencyAmount.Text);
+            double finalValue = currencyConverter.Convert(fromCurrency, toCurrency, currencyAmount);
+            outputCurrencyAmount.Text = $"The result is {finalValue.ToString()}";
+
+        }
     }
 }
