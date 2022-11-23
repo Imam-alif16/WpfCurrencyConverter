@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -46,7 +47,7 @@ namespace WpfCurrencyConverter
             string toCurrency = ((KeyValuePair<string, string>)comboboxTo.SelectedItem).Key;
             double currencyAmount = double.Parse(inputCurrencyAmount.Text);
             double finalValue = currencyConverter.Convert(fromCurrency, toCurrency, currencyAmount);
-            outputCurrencyAmount.Text = $"The result is {finalValue.ToString()}";
+            outputCurrencyAmount.Text = $"The result is {finalValue.ToString("N", CultureInfo.CreateSpecificCulture("en-US"))} {toCurrency}";
 
         }
     }
