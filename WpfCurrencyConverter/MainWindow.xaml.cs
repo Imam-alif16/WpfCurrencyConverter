@@ -46,7 +46,7 @@ namespace WpfCurrencyConverter
             string fromCurrency = ((KeyValuePair<string, string>)comboboxFrom.SelectedItem).Key;
             string toCurrency = ((KeyValuePair<string, string>)comboboxTo.SelectedItem).Key;
             double currencyAmount = double.Parse(inputCurrencyAmount.Text);
-            double finalValue = currencyConverter.Convert(fromCurrency, toCurrency, currencyAmount);
+            decimal finalValue = currencyConverter.Exchange(fromCurrency, toCurrency, currencyAmount);
             outputCurrencyAmount.Text = $"The result is {finalValue.ToString("N", CultureInfo.CreateSpecificCulture("en-US"))} {toCurrency}";
 
         }

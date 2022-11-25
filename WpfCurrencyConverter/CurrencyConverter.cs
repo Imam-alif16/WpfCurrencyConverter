@@ -30,14 +30,14 @@ namespace WpfCurrencyConverter
             return symbols;
         }
 
-        internal double Convert(string fromCurrency, string toCurrency, double currencyAmount)
+        internal decimal Exchange(string fromCurrency, string toCurrency, double currencyAmount)
         {
             string responseContent = GetResponseString($"exchangerates_data/convert?to={toCurrency}&from={fromCurrency}&amount={currencyAmount}");
 
             Dictionary<string, object> responseData = JsonConvert.DeserializeObject<Dictionary<string, object>>(responseContent);
             if ((bool)responseData["success"])
             {
-                return (double)responseData["result"];
+                return Convert.ToDecimal(responseData["result"]);
             }
             else
             {
