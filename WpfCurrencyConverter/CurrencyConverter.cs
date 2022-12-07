@@ -12,6 +12,7 @@ namespace WpfCurrencyConverter
     internal class CurrencyConverter
     {
         Dictionary<string, string> symbols;
+        Dictionary<string, Dictionary<string, decimal>> rates;
         public Dictionary<string, string> GetSymbols()
         {
             if (symbols == null)
@@ -30,6 +31,31 @@ namespace WpfCurrencyConverter
             return symbols;
         }
 
+        public Dictionary<string, Dictionary<string, decimal>> GetTimeSeries(string fromCurrency, string toCurrency)
+        {
+            //wrong format date
+            DateTime dateTimeNow = DateTime.Now;
+            DateTime dateTimeYesterday = DateTime.Now.AddDays(-6);
+            string endDate = dateTimeNow.ToString("yyyy-MM-dd");
+            //string startDate = String.Format("{0:yyyy-mm-dd}", dateTimeNow);
+            string startDate = dateTimeYesterday.ToString("yyyy-MM-dd");
+            //string endDate = String.Format("{0:yyyy-mm-dd}", dateTimeYesterday);
+            if (rates == null)
+            {
+                rates = new Dictionary<string, Dictionary<string, decimal>>();
+                string responseContent = GetResponseString($"exchangerates_data/timeseries?start_date={startDate}&end_date={endDate}&base={fromCurrency}&symbols={toCurrency}");
+
+                Dictionary<string, object> responseData = JsonConvert.DeserializeObject<Dictionary<string, object>>(responseContent);
+                if ((bool)responseData["success"])
+                {
+                    var tempRates = (JObject)responseData["rates"];
+                    rates = tempRates.ToObject<Dictionary<string, Dictionary<string, decimal>>>();
+                }
+            }
+
+            return rates;
+        }
+
         internal decimal Exchange(string fromCurrency, string toCurrency, double currencyAmount)
         {
             string responseContent = GetResponseString($"exchangerates_data/convert?to={toCurrency}&from={fromCurrency}&amount={currencyAmount}");
@@ -44,6 +70,8 @@ namespace WpfCurrencyConverter
                 return -1;
             }
         }
+
+
 
         private string GetResponseString(string relativeURI)
         {
