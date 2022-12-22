@@ -118,31 +118,32 @@
                     </StackPanel>
                 </Border>
 
-                <StackPanel Margin="0,60,0,0"
-                            Height="300"
+                <StackPanel Margin="0,40,0,0"
+                            Height="325"
                             Orientation="Vertical">
                     <TextBlock Name="outputCurrencyAmount"
                                Foreground="#E5E9F0"
-                               FontSize="32"/>
-                    
+                               FontSize="28"/>
+
                     <dvc:Chart Name="myChart"
-                               Width="650"
+                               Width="750"
                                Height="260"
                                Background="#2E3440"
                                BorderBrush="Transparent"
                                Padding="20,0,15,15"
-                               Foreground="#E5E9F0">
+                               Foreground="#E5E9F0"
+                               IsEnabled="True"
+                               IsManipulationEnabled="True">
 
                         <dvc:Chart.Series>
-                            <dvc:SplineSeries IndependentValuePath="Key"
-                                            DependentValuePath="Value">
+                            <dvc:SplineSeries ItemsSource="{Binding}"
+                                          DataContext="{Binding}"
+                                          IndependentValueBinding="{Binding Path=Key}"
+                                          DependentValueBinding="{Binding Path=Value}"
+                                          IsSelectionEnabled="True">
 
                             </dvc:SplineSeries>
                         </dvc:Chart.Series>
-                        <dvc:Chart.Axes>
-                            <dvc:LinearAxis Orientation="Y"
-                                            Interval="50"/>
-                        </dvc:Chart.Axes>
                         <dvc:Chart.LegendStyle>
                             <Style>
                                 <Setter Property="DocumentViewerBase.Width" Value="0"/>
@@ -150,7 +151,6 @@
                         </dvc:Chart.LegendStyle>
                     </dvc:Chart>
                 </StackPanel>
-
             </StackPanel>
         </Grid>
     </Border>

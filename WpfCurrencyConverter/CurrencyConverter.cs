@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,6 +15,7 @@ namespace WpfCurrencyConverter
     {
         Dictionary<string, string> symbols;
         Dictionary<string, Dictionary<string, decimal>> rates;
+
         public Dictionary<string, string> GetSymbols()
         {
             if (symbols == null)
@@ -33,13 +36,11 @@ namespace WpfCurrencyConverter
 
         public Dictionary<string, Dictionary<string, decimal>> GetTimeSeries(string fromCurrency, string toCurrency)
         {
-            //wrong format date
             DateTime dateTimeNow = DateTime.Now;
             DateTime dateTimeYesterday = DateTime.Now.AddDays(-6);
             string endDate = dateTimeNow.ToString("yyyy-MM-dd");
-            //string startDate = String.Format("{0:yyyy-mm-dd}", dateTimeNow);
             string startDate = dateTimeYesterday.ToString("yyyy-MM-dd");
-            //string endDate = String.Format("{0:yyyy-mm-dd}", dateTimeYesterday);
+
             if (rates == null)
             {
                 rates = new Dictionary<string, Dictionary<string, decimal>>();
@@ -78,7 +79,7 @@ namespace WpfCurrencyConverter
             var client = new RestClient("https://api.apilayer.com/");
 
             var request = new RestRequest(relativeURI, Method.Get);
-            request.AddHeader("apikey", "e0hnK3tZLDHcnlMhHCMMbd3OZzOPABqh");
+            request.AddHeader("apikey", "QgwEBdggi9yE3FwEcRbqRRS8zyvuecrN");
 
             RestResponse response = client.Execute(request);
             return response.Content;
